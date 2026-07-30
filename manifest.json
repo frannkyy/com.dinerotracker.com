@@ -1,0 +1,25 @@
+{
+  "short_name": "Dinero",
+  "name": "Dinero Tracker",
+  "id": "com.dinerotracker.com",
+  "package_name": "com.dinerotracker.com",
+  "description": "Smart Personal Finance, Budgeting & Expense Manager",
+  "icons": [
+    {
+      "src": "/logo.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/logo.jpg",
+      "type": "image/jpeg",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0F172A",
+  "theme_color": "#0F172A",
+  "display": "standalone",
+  "orientation": "portrait"
+}
