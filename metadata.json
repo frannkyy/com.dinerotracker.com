@@ -1,0 +1,6 @@
+{
+  "name": "Dinero Tracker",
+  "description": "Premium personal finance and budgeting mobile app tailored for the Philippines with offline storage, PH bank support, budgets, debt tracking, savings goals, and reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

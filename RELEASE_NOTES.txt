@@ -1,0 +1,8 @@
+<en-US>
+• Added Google AdMob integration with production ad units for Dinero Tracker
+• Improved app performance and stability
+• Enhanced overall user experience
+• Fixed minor bugs and UI issues
+• Optimized navigation and responsiveness
+• Configured banner ad unit placement specifically on Home tab
+</en-US>
