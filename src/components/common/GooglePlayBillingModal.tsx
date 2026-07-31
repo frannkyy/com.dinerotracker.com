@@ -17,7 +17,7 @@ export const GooglePlayBillingModal: React.FC<GooglePlayBillingModalProps> = ({ 
 
   if (!isOpen) return null;
 
-  const isAlreadyPurchased = settings.hasPurchasedRemoveAds || settings.adsEnabled === false;
+  const isAlreadyPurchased = Boolean(settings.hasPurchasedRemoveAds);
 
   const handlePurchase = async () => {
     setIsProcessing(true);

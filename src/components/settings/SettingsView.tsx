@@ -16,7 +16,6 @@ import {
   Download,
   ExternalLink,
   FileText,
-  Fingerprint,
   FolderDown,
   Globe,
   KeyRound,
@@ -167,6 +166,74 @@ export const SettingsView: React.FC = () => {
         </p>
       </div>
 
+      {/* Google Play Billing Hero Banner - Remove All Ads ($0.99) */}
+      <div className="p-5 rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-blue-700 text-white shadow-xl space-y-3 relative overflow-hidden">
+        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none" />
+        
+        <div className="flex items-center justify-between relative z-10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shrink-0 border border-white/20 shadow-xs">
+              <ShoppingBag size={20} className="text-white" />
+            </div>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-[10px] uppercase tracking-wider text-emerald-200 font-mono bg-emerald-950/40 px-2 py-0.5 rounded-full border border-emerald-400/30">
+                  Google Play Store
+                </span>
+                <Sparkles size={13} className="text-amber-300" />
+              </div>
+              <h2 className="font-black text-base text-white leading-snug">
+                Remove All Ads Forever
+              </h2>
+            </div>
+          </div>
+
+          <div className="text-right font-mono">
+            <span className="text-xl font-black text-white">$0.99</span>
+            <div className="text-[10px] text-emerald-200">One-Time</div>
+          </div>
+        </div>
+
+        {settings.hasPurchasedRemoveAds ? (
+          <div className="p-3.5 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-between gap-3 relative z-10">
+            <div className="flex items-center gap-2.5">
+              <CheckCircle2 size={22} className="text-emerald-300 shrink-0" />
+              <div>
+                <div className="font-bold text-xs text-white">
+                  Ad-Free Premium Active
+                </div>
+                <div className="text-[11px] text-emerald-100">
+                  All banner, interstitial, and native ads are permanently removed via Google Play Store.
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-3 relative z-10 pt-1">
+            <p className="text-xs text-emerald-50 leading-relaxed font-medium">
+              Eliminate all banner ads, interstitial popups, and native promotional cards for a lifetime with a single <strong>$0.99 Google Play purchase</strong>.
+            </p>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={openPlayBillingModal}
+                className="flex-1 py-3 px-4 rounded-2xl bg-white hover:bg-emerald-50 active:scale-98 text-emerald-900 font-black text-xs transition-all shadow-md flex items-center justify-center gap-2"
+              >
+                <ShoppingBag size={16} className="text-emerald-700" />
+                <span>Upgrade / Remove Ads ($0.99)</span>
+              </button>
+
+              <button
+                onClick={openPlayBillingModal}
+                className="py-3 px-4 rounded-2xl bg-black/20 hover:bg-black/30 border border-white/20 text-white font-bold text-xs transition-all backdrop-blur-sm"
+              >
+                Restore
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* User Profile & Greeting Personalization */}
       <div className="p-5 rounded-3xl bg-white dark:bg-[#1D1D1F] border border-gray-100 dark:border-slate-800 shadow-xs space-y-4">
         <div className="flex items-center gap-2">
@@ -287,76 +354,6 @@ export const SettingsView: React.FC = () => {
         </div>
       </div>
 
-      {/* Google Play Billing & Remove Ads ($0.99) */}
-      <div className="p-5 rounded-3xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-blue-500/10 border border-emerald-500/20 dark:border-emerald-500/30 shadow-xs space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
-              <ShoppingBag size={18} />
-            </div>
-            <div>
-              <h2 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
-                <span>Google Play Billing & Ad-Free</span>
-                <Sparkles size={14} className="text-amber-500" />
-              </h2>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                In-App Product: <code className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">remove_ads_099</code>
-              </p>
-            </div>
-          </div>
-
-          <span className="px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-mono font-black text-xs">
-            $0.99
-          </span>
-        </div>
-
-        {settings.hasPurchasedRemoveAds || settings.adsEnabled === false ? (
-          <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
-            <CheckCircle2 size={22} className="text-emerald-500 shrink-0" />
-            <div className="flex-1 min-w-0">
-              <div className="font-bold text-xs text-emerald-900 dark:text-emerald-200">
-                Ad-Free Premium License Active
-              </div>
-              <div className="text-[11px] text-emerald-700 dark:text-emerald-300">
-                All Banner, Interstitial, and Native Ads are disabled across the app.
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                updateSettings({ adsEnabled: true, hasPurchasedRemoveAds: false });
-                showToast('Ads re-enabled for testing.');
-              }}
-              className="text-[10px] font-bold text-slate-400 hover:text-slate-600 underline shrink-0"
-            >
-              Re-enable Ads (Test)
-            </button>
-          </div>
-        ) : (
-          <div className="space-y-3 pt-1">
-            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Enjoy a clean, uninterrupted financial tracking experience. Purchase the <strong className="text-emerald-600 dark:text-emerald-400">Remove Ads</strong> one-time product for <strong>$0.99</strong> through Google Play Store.
-            </p>
-
-            <div className="flex items-center gap-2">
-              <button
-                onClick={openPlayBillingModal}
-                className="flex-1 py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white font-extrabold text-xs transition-all shadow-sm flex items-center justify-center gap-2"
-              >
-                <ShoppingBag size={16} />
-                <span>Purchase Remove Ads ($0.99)</span>
-              </button>
-
-              <button
-                onClick={openPlayBillingModal}
-                className="py-3 px-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs transition-all"
-              >
-                Restore
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-
       {/* Security & PIN Lock */}
       <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs space-y-4">
         <div className="flex items-center gap-2">
@@ -414,36 +411,6 @@ export const SettingsView: React.FC = () => {
               <p className="text-[11px] text-slate-400">
                 Active PIN: <span className="font-mono font-bold text-blue-600 dark:text-blue-400">{settings.pinCode || '1234'}</span>
               </p>
-            </div>
-
-            <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
-              <div>
-                <div className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-                  <Fingerprint size={15} className="text-emerald-500" />
-                  <span>Fingerprint / Face ID Unlock</span>
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Allow instant biometric verification on startup
-                </div>
-              </div>
-
-              <label className="relative inline-flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={settings.biometricsEnabled}
-                  onChange={() => {
-                    const nextVal = !settings.biometricsEnabled;
-                    updateSettings({ biometricsEnabled: nextVal });
-                    showToast(
-                      nextVal
-                        ? 'Fingerprint / Face ID unlock enabled'
-                        : 'Biometric unlock disabled'
-                    );
-                  }}
-                  className="sr-only peer"
-                />
-                <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-800 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600" />
-              </label>
             </div>
           </>
         )}

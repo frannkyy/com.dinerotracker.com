@@ -21,7 +21,7 @@ export const AdMobNativeAd: React.FC<AdMobNativeAdProps> = ({
 }) => {
   const { settings } = useApp();
 
-  const isEnabled = settings.adsEnabled ?? true;
+  const isEnabled = (settings.adsEnabled ?? true) && !settings.hasPurchasedRemoveAds;
   const rawUnitId = slot || settings.admobNativeUnitId;
   const unitId =
     !rawUnitId || rawUnitId.includes('3940256099942544')

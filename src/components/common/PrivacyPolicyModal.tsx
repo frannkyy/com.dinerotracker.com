@@ -82,14 +82,14 @@ export const PrivacyPolicyModal: React.FC<PrivacyPolicyModalProps> = ({ isOpen, 
             <section className="space-y-2">
               <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2 text-base">
                 <Cpu className="text-emerald-500" size={18} />
-                3. Passcode & Biometric Security
+                3. Passcode PIN Security
               </h3>
               <p className="text-xs text-slate-600 dark:text-slate-400">
-                When you enable Security PIN Lock or Touch ID / Face ID Biometric Unlock:
+                When you enable Security PIN Lock:
               </p>
               <ul className="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-disc pl-4">
-                <li>Your PIN passcode is hashed and stored exclusively on your device.</li>
-                <li>Biometric verification utilizes your device’s native hardware security enclave. Biometric scans never leave your device hardware.</li>
+                <li>Your PIN passcode is hashed and stored exclusively on your device local storage.</li>
+                <li>No authentication keys or PIN data leave your device.</li>
               </ul>
             </section>
 

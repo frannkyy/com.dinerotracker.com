@@ -16,7 +16,7 @@ export const AdMobBanner: React.FC<AdMobBannerProps> = ({
   const { settings, openPlayBillingModal } = useApp();
   const adRef = useRef<HTMLDivElement>(null);
 
-  const isEnabled = settings.adsEnabled ?? true;
+  const isEnabled = (settings.adsEnabled ?? true) && !settings.hasPurchasedRemoveAds;
   const rawUnitId = slot || settings.admobBannerUnitId;
   const unitId =
     !rawUnitId || rawUnitId.includes('3940256099942544')

@@ -113,7 +113,7 @@ export const AdMobInterstitialModal: React.FC<AdMobInterstitialModalProps> = ({
             </h2>
 
             <p className="text-xs sm:text-sm text-slate-300 max-w-sm mb-6 leading-relaxed">
-              Unlock real-time exchange rates, automated recurring bills sync, advanced analytics graphs, and biometric cloud backups.
+              Unlock real-time exchange rates, automated recurring bills sync, advanced analytics graphs, and secure cloud backups.
             </p>
 
             {/* Ad Feature Badges */}

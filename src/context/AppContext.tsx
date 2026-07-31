@@ -162,7 +162,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const closePlayBillingModal = () => setIsPlayBillingOpen(false);
 
   const recordActionAndCheckAd = (_actionName?: string) => {
-    if (settings.adsEnabled === false) return;
+    if (settings.adsEnabled === false || settings.hasPurchasedRemoveAds) return;
 
     setActionCount((prev) => {
       const next = prev + 1;
