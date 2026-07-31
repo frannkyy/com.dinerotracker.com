@@ -139,6 +139,8 @@ export interface UserSettings {
   cloudSyncEnabled: boolean;
   showMobileFrame: boolean;
   adsEnabled?: boolean;
+  hasPurchasedRemoveAds?: boolean;
+  removeAdsPurchaseDate?: string;
   admobPublisherId?: string;
   admobBannerUnitId?: string;
   admobNativeUnitId?: string;

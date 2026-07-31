@@ -13,7 +13,7 @@ export const AdMobBanner: React.FC<AdMobBannerProps> = ({
   slot,
   format = 'banner',
 }) => {
-  const { settings } = useApp();
+  const { settings, openPlayBillingModal } = useApp();
   const adRef = useRef<HTMLDivElement>(null);
 
   const isEnabled = settings.adsEnabled ?? true;
@@ -51,9 +51,14 @@ export const AdMobBanner: React.FC<AdMobBannerProps> = ({
             </span>
             <span>Google AdMob Banner</span>
           </div>
-          <span className="text-[9px] text-slate-500">
-            {isTestUnit ? 'Test Mode Active' : 'Live Ad Unit'}
-          </span>
+          
+          <button
+            onClick={openPlayBillingModal}
+            className="text-[10px] font-extrabold text-emerald-400 hover:text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-500/40 flex items-center gap-1 transition-all active:scale-95"
+          >
+            <Sparkles size={10} />
+            <span>Remove Ads ($0.99)</span>
+          </button>
         </div>
 
         {/* Ad Contents / Container */}

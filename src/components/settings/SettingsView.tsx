@@ -10,6 +10,7 @@ import {
 import dineroLogo from '../../assets/images/dinero_app_logo_1784744183566.jpg';
 import { PrivacyPolicyModal } from '../common/PrivacyPolicyModal';
 import {
+  CheckCircle2,
   ClipboardPaste,
   Copy,
   Download,
@@ -26,7 +27,9 @@ import {
   Share2,
   Shield,
   ShieldCheck,
+  ShoppingBag,
   Smartphone,
+  Sparkles,
   Sun,
   Moon,
   Trash2,
@@ -47,6 +50,7 @@ export const SettingsView: React.FC = () => {
     resetAllData,
     restoreFromJSON,
     showToast,
+    openPlayBillingModal,
   } = useApp();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -281,6 +285,76 @@ export const SettingsView: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Google Play Billing & Remove Ads ($0.99) */}
+      <div className="p-5 rounded-3xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-blue-500/10 border border-emerald-500/20 dark:border-emerald-500/30 shadow-xs space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+              <ShoppingBag size={18} />
+            </div>
+            <div>
+              <h2 className="font-bold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
+                <span>Google Play Billing & Ad-Free</span>
+                <Sparkles size={14} className="text-amber-500" />
+              </h2>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                In-App Product: <code className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">remove_ads_099</code>
+              </p>
+            </div>
+          </div>
+
+          <span className="px-2.5 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 font-mono font-black text-xs">
+            $0.99
+          </span>
+        </div>
+
+        {settings.hasPurchasedRemoveAds || settings.adsEnabled === false ? (
+          <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
+            <CheckCircle2 size={22} className="text-emerald-500 shrink-0" />
+            <div className="flex-1 min-w-0">
+              <div className="font-bold text-xs text-emerald-900 dark:text-emerald-200">
+                Ad-Free Premium License Active
+              </div>
+              <div className="text-[11px] text-emerald-700 dark:text-emerald-300">
+                All Banner, Interstitial, and Native Ads are disabled across the app.
+              </div>
+            </div>
+            <button
+              onClick={() => {
+                updateSettings({ adsEnabled: true, hasPurchasedRemoveAds: false });
+                showToast('Ads re-enabled for testing.');
+              }}
+              className="text-[10px] font-bold text-slate-400 hover:text-slate-600 underline shrink-0"
+            >
+              Re-enable Ads (Test)
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-3 pt-1">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Enjoy a clean, uninterrupted financial tracking experience. Purchase the <strong className="text-emerald-600 dark:text-emerald-400">Remove Ads</strong> one-time product for <strong>$0.99</strong> through Google Play Store.
+            </p>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={openPlayBillingModal}
+                className="flex-1 py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white font-extrabold text-xs transition-all shadow-sm flex items-center justify-center gap-2"
+              >
+                <ShoppingBag size={16} />
+                <span>Purchase Remove Ads ($0.99)</span>
+              </button>
+
+              <button
+                onClick={openPlayBillingModal}
+                className="py-3 px-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs transition-all"
+              >
+                Restore
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Security & PIN Lock */}

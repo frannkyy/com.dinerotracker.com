@@ -13,6 +13,7 @@ import { getStoredData, saveAllData, clearAllStorage } from '../utils/storage';
 import { DEFAULT_CATEGORIES } from '../data/categories';
 import confetti from 'canvas-confetti';
 import { AdMobInterstitialModal } from '../components/common/AdMobInterstitialModal';
+import { GooglePlayBillingModal } from '../components/common/GooglePlayBillingModal';
 
 interface AppContextType {
   accounts: Account[];
@@ -98,6 +99,11 @@ interface AppContextType {
   triggerInterstitialAd: () => void;
   dismissInterstitialAd: () => void;
   recordActionAndCheckAd: (actionName?: string) => void;
+
+  // Google Play Billing
+  isPlayBillingOpen: boolean;
+  openPlayBillingModal: () => void;
+  closePlayBillingModal: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -150,6 +156,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // AdMob Interstitial Capping State
   const [actionCount, setActionCount] = useState<number>(0);
   const [showInterstitialAd, setShowInterstitialAd] = useState<boolean>(false);
+  const [isPlayBillingOpen, setIsPlayBillingOpen] = useState<boolean>(false);
+
+  const openPlayBillingModal = () => setIsPlayBillingOpen(true);
+  const closePlayBillingModal = () => setIsPlayBillingOpen(false);
 
   const recordActionAndCheckAd = (_actionName?: string) => {
     if (settings.adsEnabled === false) return;
@@ -711,12 +721,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         triggerInterstitialAd,
         dismissInterstitialAd,
         recordActionAndCheckAd,
+        isPlayBillingOpen,
+        openPlayBillingModal,
+        closePlayBillingModal,
       }}
     >
       {children}
       <AdMobInterstitialModal
         isOpen={showInterstitialAd}
         onClose={dismissInterstitialAd}
+      />
+      <GooglePlayBillingModal
+        isOpen={isPlayBillingOpen}
+        onClose={closePlayBillingModal}
       />
     </AppContext.Provider>
   );

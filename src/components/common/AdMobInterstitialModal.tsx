@@ -14,7 +14,7 @@ export const AdMobInterstitialModal: React.FC<AdMobInterstitialModalProps> = ({
   onClose,
   unitId,
 }) => {
-  const { settings } = useApp();
+  const { settings, openPlayBillingModal } = useApp();
   const [countdown, setCountdown] = useState(3);
   const [canClose, setCanClose] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -139,6 +139,17 @@ export const AdMobInterstitialModal: React.FC<AdMobInterstitialModalProps> = ({
               <span>Install Free from Google Play</span>
               <ExternalLink size={14} />
             </a>
+
+            <button
+              onClick={() => {
+                onClose();
+                openPlayBillingModal();
+              }}
+              className="mt-3 text-xs font-bold text-emerald-400 hover:text-emerald-300 flex items-center justify-center gap-1.5 transition-colors"
+            >
+              <Sparkles size={14} />
+              <span>Tired of Ads? Remove All Ads for $0.99 (Google Play)</span>
+            </button>
           </div>
 
           {/* Ad Footer Info */}
